@@ -1,0 +1,61 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "FieldContent",
+				"value": "drink",
+				"type": "Text"
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Eiusmod qui anim sit aliquip nostrud adipisicing et commodo laboris ullamco est sit magna. Nulla velit est fugiat id commodo cillum anim et ea do consequat occaecat enim ut laboris. Culpa ex nisi ea commodo aliqua elit proident pariatur dolore do quis tempor dolore occaecat."
+						}
+					}
+				]
+			},
+			"button_link": {
+				"key": "4d50f025-45fc-4bce-b7b7-6feb2d10b49d",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://prismic.io",
+					"text": "east"
+				}
+			},
+			"button_text": {
+				"__TYPE__": "FieldContent",
+				"value": "did",
+				"type": "Text"
+			},
+			"avatar": {
+				"__TYPE__": "ImageContent",
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1586952518485-11b180e92764",
+					"width": 4172,
+					"height": 4000
+				},
+				"url": "https://images.unsplash.com/photo-1586952518485-11b180e92764",
+				"width": 4172,
+				"height": 4000,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"alt": "page",
+				"thumbnails": {}
+			}
+		},
+		"items": []
+	}
+]
