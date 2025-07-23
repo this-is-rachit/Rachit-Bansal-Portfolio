@@ -6,7 +6,6 @@ import { ImageField } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import clsx from "clsx";
 
-
 export default function Avatar({
   image,
   className,

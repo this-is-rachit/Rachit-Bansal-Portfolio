@@ -30,7 +30,7 @@ export default function ContentList({
     const [hovering, setHovering] = useState(false);
     const lastMousePos = useRef({ x: 0, y: 0 });
 
-    const urlPrefix = contentType === "Achievements" ? "/achievements" : "/project";
+    const urlPrefix = contentType === "Achievements" ? "/achievements" : "/projects";
 
     useEffect(() => {
         // Animate list-items in with a stagger

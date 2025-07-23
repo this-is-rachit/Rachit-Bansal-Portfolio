@@ -23,43 +23,39 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
  */
 const Hero: FC<HeroProps> = ({ slice }) => {
   const component = useRef(null);
-  const hasMounted = useRef(false);
 
   useEffect(() => {
-    if (!hasMounted.current) {
-      hasMounted.current = true;
-      const ctx = gsap.context(() => {
-        const t1 = gsap.timeline();
-        t1.fromTo(
-          ".name-animation",
-          {
-            x: -100,
-            opacity: 0,
-            rotate: -10,
+    const ctx = gsap.context(() => {
+      const t1 = gsap.timeline();
+      t1.fromTo(
+        ".name-animation",
+        {
+          x: -100,
+          opacity: 0,
+          rotate: -10,
+        },
+        {
+          x: 0,
+          opacity: 1,
+          rotate: 0,
+          ease: "elastic.out(1,0.3)",
+          duration: 1,
+          transformOrigin: "left top",
+          delay: 0.5,
+          stagger: {
+            each: 0.1,
+            from: "random",
           },
-          {
-            x: 0,
-            opacity: 1,
-            rotate: 0,
-            ease: "elastic.out(1,0.3)",
-            duration: 1,
-            transformOrigin: "left top",
-            delay: 0.5,
-            stagger: {
-              each: 0.1,
-              from: "random",
-            },
-          }
-        );
-        t1.fromTo(
-          ".job-title",
-          { opacity: 0, y: 20, scale: 1.2 },
-          { opacity: 1, y: 0, duration: 1, ease: "elastic.out(1,0.3)", scale: 1 },
-          "-=0.3"
-        );
-      }, component);
-      return () => ctx.revert();
-    }
+        }
+      );
+      t1.fromTo(
+        ".job-title",
+        { opacity: 0, y: 20, scale: 1.2 },
+        { opacity: 1, y: 0, duration: 1, ease: "elastic.out(1,0.3)", scale: 1 },
+        "-=0.3"
+      );
+    }, component);
+    return () => ctx.revert();
   }, []);
 
   const renderLetters = (TextField: any, type: string) => {
