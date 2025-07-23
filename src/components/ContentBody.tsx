@@ -3,9 +3,9 @@ import { Content } from "@prismicio/client";
 
 import { components } from "@/slices";
 import Heading from "@/components/Heading";
-import Bounded from "@/components/Bounded";
+// import Bounded from "@/components/Bounded"; // Removed this line
 import { formatDate } from "@/utils/formatDate";
-import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, Key } from "react";
+// Removed unnecessary React type imports, they are not needed for simple string mapping
 
 export default function ContentBody({
   page,
@@ -14,23 +14,28 @@ export default function ContentBody({
 }) {
   const formattedDate = formatDate(page.data.date);
   return (
-    <Bounded as="article">
-      <div className="rounded-2xl border-2 border-slate-800 bg-slate-900 px-4 py-10 md:px-8 md:py-20">
-        <Heading as="h1">{page.data.title}</Heading>
-        <div className="flex gap-4 text-yellow-400">
-          {page.tags.map((tag: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined, index: Key | null | undefined) => (
-            <span key={index} className="text-xl font-bold">
-              {tag}
-            </span>
-          ))}
-        </div>
-        <p className="mt-8 border-b border-slate-600 text-xl font-medium text-slate-300">
-          {formattedDate}
-        </p>
-        <div className="prose prose-lg prose-invert mt-12 w-full max-w-none md:mt-20">
-          <SliceZone slices={page.data.slices} components={components} />
+    // Replaced <Bounded as="article" ...> with <article className="...">
+    // and applied Bounded's internal max-width and padding styles directly
+    <article className="px-4 py-10 md:px-6 md:py-14 lg:py-16">
+      <div className="mx-auto w-full max-w-7xl"> {/* Bounded's inner div */}
+        <div className="rounded-2xl border-2 border-slate-800 bg-slate-900 px-4 py-10 md:px-8 md:py-20">
+          <Heading as="h1">{page.data.title}</Heading>
+          <div className="flex gap-4 text-yellow-400">
+            {/* Corrected the type of 'tag' to string, which is what Prismic tags are */}
+            {page.tags.map((tag: string, index: number) => (
+              <span key={index} className="text-xl font-bold">
+                {tag}
+              </span>
+            ))}
+          </div>
+          <p className="mt-8 border-b border-slate-600 text-xl font-medium text-slate-300">
+            {formattedDate}
+          </p>
+          <div className="prose prose-lg prose-invert mt-12 w-full max-w-none md:mt-20">
+            <SliceZone slices={page.data.slices} components={components} />
+          </div>
         </div>
       </div>
-    </Bounded>
+    </article>
   );
 }
