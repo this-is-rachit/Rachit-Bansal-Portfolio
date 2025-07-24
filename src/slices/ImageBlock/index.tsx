@@ -7,14 +7,14 @@ export type ImageBlockProps = SliceComponentProps<Content.ImageBlockSlice>;
 
 const ImageBlock: FC<ImageBlockProps> = ({ slice }) => {
   return (
-    <div className="relative w-full h-64 overflow-hidden">
+    <div className="relative w-full h-[40rem] overflow-hidden">
       <PrismicNextImage
         field={slice.primary.image}
         fill
         imgixParams={{
           
         }}
-        className="object-cover"
+        className="object-contain object-left"
       />
     </div>
   );
