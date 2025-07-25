@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MdArrowOutward } from "react-icons/md";
 import { Content } from "@prismicio/client";
+import Link from "next/link"; // Import the Next.js Link component
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,7 +25,6 @@ export default function ContentList({
 }: ContentListProps) {
     const component = useRef(null);
     const itemsRef = useRef<Array<HTMLLIElement | null>>([]);
-
     const revealRef = useRef(null);
     const [currentItem, setCurrentItem] = useState<null | number>(null);
     const [hovering, setHovering] = useState(false);
@@ -63,10 +63,9 @@ export default function ContentList({
     }, []);
 
     useEffect(() => {
-        // Mouse move event listener
+        // Mouse move event listener for the hover effect
         const handleMouseMove = (e: MouseEvent) => {
             const mousePos = { x: e.clientX, y: e.clientY + window.scrollY };
-            // Calculate speed and direction
             const speed = Math.sqrt(Math.pow(mousePos.x - lastMousePos.current.x, 2));
 
             const ctx = gsap.context(() => {
@@ -78,7 +77,7 @@ export default function ContentList({
                     gsap.to(revealRef.current, {
                         x: gsap.utils.clamp(0, maxX, mousePos.x - 110),
                         y: gsap.utils.clamp(0, maxY, mousePos.y - 160),
-                        rotation: speed * (mousePos.x > lastMousePos.current.x ? 1 : -1), // Apply rotation based on speed and direction
+                        rotation: speed * (mousePos.x > lastMousePos.current.x ? 1 : -1),
                         ease: "back.out(2)",
                         duration: 1.3,
                     });
@@ -123,7 +122,7 @@ export default function ContentList({
         });
     });
 
-    // Preload images
+    // Preload images for the hover effect
     useEffect(() => {
         contentImages.forEach((url) => {
             if (!url) return;
@@ -141,21 +140,21 @@ export default function ContentList({
             >
                 {items.map((item, index) => (
                     <li
-                        key={index}
+                        key={item.id} // Using item.id for a more stable key
                         ref={(el) => {
                             itemsRef.current[index] = el;
                         }}
                         onMouseEnter={() => onMouseEnter(index)}
                         className="list-item opacity-0"
                     >
-                        <a
+                        <Link
                             href={`${urlPrefix}/${item.uid}`}
-                            className="flex flex-col justify-between border-t border-t-slate-100 py-10  text-slate-200 md:flex-row "
+                            className="flex flex-col justify-between border-t border-t-slate-100 py-10 text-slate-200 md:flex-row"
                             aria-label={item.data.title || ""}
                         >
                             <div className="flex flex-col">
                                 <span className="text-3xl font-bold">{item.data.title}</span>
-                                <div className="flex gap-3 text-yellow-400">
+                                <div className="flex flex-wrap gap-3 text-yellow-400">
                                     {item.tags.map((tag, index) => (
                                         <span key={index} className="text-lg font-bold">
                                             {tag}
@@ -166,7 +165,7 @@ export default function ContentList({
                             <span className="ml-auto flex items-center gap-2 text-xl font-medium md:ml-0">
                                 {viewMoreText} <MdArrowOutward />
                             </span>
-                        </a>
+                        </Link>
                     </li>
                 ))}
 
